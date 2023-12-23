@@ -1588,7 +1588,7 @@ We've done most of the standard ones.
 
 398
 00:29:36,320 --> 00:29:42,420
-We'll have to go through, but there's still yeah scripting and authentication. So those
+We'll have to go through, but there's still yeah scripting and authentication. So those 
 
 399
 00:29:42,420 --> 00:29:47,320
