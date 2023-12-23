@@ -30,7 +30,7 @@ So let's share my screen.
 00:00:47,600 --> 00:00:59,740
 While you do that, Simon, just to say that a delay job is one of the easiest jobs to implement in often distinguishing between tasks that each job runs.
 
-9
+9 
 00:00:59,740 --> 00:01:07,280
 Not only does it give you the opportunity to let a previous job finish and complete and so on and so forth,
 
