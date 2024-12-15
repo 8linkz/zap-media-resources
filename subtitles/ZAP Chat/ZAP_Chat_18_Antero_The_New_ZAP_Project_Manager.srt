@@ -120,7 +120,7 @@ Exactly. So, I'll start managing the ZAP projects as I'm managing another open s
 
 31
 00:02:35,900 --> 00:02:41,660
-which is KIX for ISE security, which the premises is basically the same. We do have an open source
+which is KICS for ISE security, which the premises is basically the same. We do have an open source
 
 32
 00:02:41,660 --> 00:02:47,760
