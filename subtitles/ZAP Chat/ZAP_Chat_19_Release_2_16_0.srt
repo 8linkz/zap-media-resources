@@ -1,0 +1,1144 @@
+1
+00:00:00,000 --> 00:00:10,620
+Hello and welcome to another episode of ZAP Chat with myself and Yannis.
+
+2
+00:00:11,520 --> 00:00:14,000
+Hello, long time no speak. How have you been, Simon?
+
+3
+00:00:14,720 --> 00:00:16,320
+I've been great, thank you. And you?
+
+4
+00:00:17,520 --> 00:00:21,620
+Good, I can't wait to get into this 2.16 release features with you.
+
+5
+00:00:22,740 --> 00:00:24,780
+Exactly, and that's what we're talking about today.
+
+6
+00:00:24,780 --> 00:00:30,260
+ZAP 2.16, which we released just under two weeks ago, I think it was.
+
+7
+00:00:31,340 --> 00:00:33,840
+So let's get straight into it.
+
+8
+00:00:34,220 --> 00:00:41,240
+And what I'll do is I will attempt to share my screen.
+
+9
+00:00:41,740 --> 00:00:42,580
+Where's it coming up?
+
+10
+00:00:43,440 --> 00:00:50,740
+And make sure I share the right one.
+
+11
+00:00:52,000 --> 00:00:54,560
+And hopefully you can now
+
+12
+00:00:54,780 --> 00:00:55,920
+see ZAP.
+
+13
+00:00:58,000 --> 00:01:00,780
+So what's new here? Where shall we start?
+
+14
+00:01:01,580 --> 00:01:06,140
+Well, I mean, it kind of looks 2.16 will look very similar to 2.15.
+
+15
+00:01:06,400 --> 00:01:14,480
+Apart from we've got the new checkmarks branding, which you may or may not be able to see depending on where the window appears with our faces in.
+
+16
+00:01:14,640 --> 00:01:24,380
+But we've also, if you see there's a news item and if you click on that, then you will be taken to the ZAP blog post where we've got everything explained
+
+17
+00:01:24,780 --> 00:01:25,800
+or kind of high level things.
+
+18
+00:01:26,100 --> 00:01:31,080
+And I'm not going to read this out, but I am going to use it as a prompt to remind me everything's in there.
+
+19
+00:01:32,080 --> 00:01:37,140
+And the first thing is you're no longer Java 11 isn't good enough.
+
+20
+00:01:37,220 --> 00:01:38,760
+You've got to have at least Java 17.
+
+21
+00:01:39,560 --> 00:01:51,940
+So we always kind of we try and keep up with not the latest and greatest version of Java, but we don't want to get too old because there's performance improvements and there's new fun things that we can play around with.
+
+22
+00:01:52,100 --> 00:01:54,480
+So you need a minimum of Java 17, I'm afraid.
+
+23
+00:01:54,780 --> 00:02:06,340
+So what's the so if I've got some scripts using Nashorn, what's the process of migrating them to Graal?
+
+24
+00:02:06,760 --> 00:02:11,520
+Yeah. So thank you for reminding me that even though it's in front of me in the screen.
+
+25
+00:02:12,280 --> 00:02:22,280
+Basically, Java 11, they included the Oracle included the Nashorn JavaScript engine, and that's no longer included in Java 17.
+
+26
+00:02:22,280 --> 00:02:24,420
+So that's why we've moved to Graal.
+
+27
+00:02:24,780 --> 00:02:28,280
+Now, in most cases, you won't have to do anything.
+
+28
+00:02:28,920 --> 00:02:30,620
+Many scripts will just work.
+
+29
+00:02:31,060 --> 00:02:36,960
+We put some code in there which detects you're using Nashorn and changes it says, no, we're releasing Graal and everything will be fine.
+
+30
+00:02:37,800 --> 00:02:42,240
+However, there are some features which will not just work straight across.
+
+31
+00:02:42,800 --> 00:02:48,120
+So have a look at the migration guide, which is linked in the release notes and on the blog.
+
+32
+00:02:49,460 --> 00:02:51,460
+So follow the migration guide, everyone
+
+33
+00:02:51,460 --> 00:02:54,220
+and it should be a piece of cake, he says.
+
+34
+00:02:54,400 --> 00:02:54,680
+
+
+35
+00:02:54,780 --> 00:02:57,940
+Famous last words. If you've got any problems, just come back to us through the normal channels.
+
+36
+00:02:58,260 --> 00:02:59,100
+Exactly.
+
+37
+00:02:59,160 --> 00:02:59,660
+Yes.
+
+38
+00:02:59,880 --> 00:03:02,600
+So the next feature is a big one.
+
+39
+00:03:03,000 --> 00:03:11,240
+Now, this is one where we were going to release ZAP 2.16 just before Christmas, but we decided to hold on because of the client spider.
+
+40
+00:03:12,220 --> 00:03:14,900
+So we already have two spiders.
+
+41
+00:03:15,180 --> 00:03:18,240
+We've got the traditional spider and we've got the Ajax spider.
+
+42
+00:03:18,840 --> 00:03:20,780
+So we've decided to add a third one.
+
+43
+00:03:22,080 --> 00:03:24,400
+Well, if you've got one, it should be the only one.
+
+44
+00:03:24,400 --> 00:03:27,340
+But if you've got two, there's definitely room for a third one, right?
+
+45
+00:03:27,400 --> 00:03:28,600
+So what's new in the client spider?
+
+46
+00:03:29,240 --> 00:03:33,900
+Well, the traditional spider is very much works with traditional web apps.
+
+47
+00:03:34,020 --> 00:03:40,800
+It makes requests, analyzes responses, HTTP, HTML responses, and does a standard crawling thing.
+
+48
+00:03:40,960 --> 00:03:52,460
+That doesn't work with modern web apps because modern web apps typically use a lot of JavaScript and the links and the controls are all in JavaScript, which the traditional spider can't understand.
+
+49
+00:03:52,460 --> 00:03:54,340
+You really need to have.
+
+50
+00:03:54,400 --> 00:04:01,780
+A real browser parsing and rendering the pages in order to explore a modern web app.
+
+51
+00:04:02,440 --> 00:04:04,480
+That's what the Ajax spider does.
+
+52
+00:04:05,260 --> 00:04:09,100
+The trouble is we know it isn't as effective as it could be.
+
+53
+00:04:09,820 --> 00:04:22,240
+We actually based the Ajax spider on a third party open source project called Crawl Jax, and that is quite big and quite complicated and it is maintained kind of on and off.
+
+54
+00:04:23,120 --> 00:04:24,240
+So it has been fairly effective.
+
+55
+00:04:24,400 --> 00:04:52,460
+But we thought it could be better, so we have submitted some patches to it in the past, some of those have emerged, but it still doesn't work in quite the way we'd like, so we've written a new spider and that's the client spider and there's quite a lot to talk about, so I think we should do a separate session on this, but what I will do is I will show you very quickly if you go into ZAP and then go into the tools menu, you'll find the client spider there and you can run it just in.
+
+56
+00:04:52,460 --> 00:04:54,280
+It's very similar to run as the Ajax
+
+57
+00:04:54,400 --> 00:05:08,800
+Spider and it works in fairly similar way, but it is subtly different and so far it's proved more effective, it's a bit faster and more effective in many cases, but would love you to try it out.
+
+58
+00:05:08,800 --> 00:05:15,260
+So the next very next video we should cover the client spider and go into that in a lot more detail.
+
+59
+00:05:16,560 --> 00:05:24,300
+What I like about this client spider is that it gives me the novice developer the ability to access the full DOM.
+
+60
+00:05:24,400 --> 00:05:32,800
+Through the ZAP browser extension, so beforehand I didn't have that through the Ajax spider, so more to come on that a separate video.
+
+61
+00:05:32,800 --> 00:05:36,160
+What else is new in 2.16 Simon right?
+
+62
+00:05:36,160 --> 00:05:40,000
+Well, something for those of you use the ZAP GUI.
+
+63
+00:05:40,000 --> 00:05:44,160
+We have detachable tabs, so that is something I can show you very quickly.
+
+64
+00:05:44,960 --> 00:05:52,640
+Basically you can right click on any tab and you can move it to a new window and this will work with as many tabs as you want.
+
+65
+00:05:52,640 --> 00:05:53,760
+
+
+66
+00:05:53,760 --> 00:05:59,360
+So if you want the scripts tab, maybe we can have that in a new window.
+
+67
+00:05:59,920 --> 00:06:03,600
+Now, this is not so great on a small screen.
+
+68
+00:06:03,600 --> 00:06:08,000
+If you've got one screen and it's fairly small, you might not find this very useful.
+
+69
+00:06:08,000 --> 00:06:12,880
+However, if you've got multiple screens, you'll find this incredibly useful because you can have,
+
+70
+00:06:12,880 --> 00:06:15,600
+you can put the tabs wherever you want.
+
+71
+00:06:16,560 --> 00:06:18,240
+You can move them around, resize them.
+
+72
+00:06:18,240 --> 00:06:22,720
+They'll they'll slot that they follow the standard Windows guidelines.
+
+73
+00:06:22,720 --> 00:06:23,600
+So they slot.
+
+74
+00:06:23,600 --> 00:06:26,240
+Become full screen or half screen, all those kind of things.
+
+75
+00:06:26,960 --> 00:06:30,160
+And if you close them, then they just go back to wherever they were.
+
+76
+00:06:31,200 --> 00:06:34,480
+So yeah, that's something if you got, if you use a ZAP desktop
+
+77
+00:06:35,440 --> 00:06:37,840
+and you've got multiple screens, then you can have a lot of fun with that.
+
+78
+00:06:39,440 --> 00:06:43,680
+Who said that it's only developers that get to be into a flow state, right?
+
+79
+00:06:43,680 --> 00:06:50,400
+And you need to out tab or control tab between flow states as a security professional as well,
+
+80
+00:06:50,400 --> 00:06:52,800
+when it comes to pen testing or whatever you might be doing.
+
+81
+00:06:53,600 --> 00:06:56,400
+I used this in the fuzzing session.
+
+82
+00:06:56,400 --> 00:06:58,240
+It just makes things so much simpler, right?
+
+83
+00:06:58,240 --> 00:07:00,880
+Especially adding, deleting payloads and so on.
+
+84
+00:07:00,880 --> 00:07:04,320
+Plus you could time it with the other keyboard shortcuts and just,
+
+85
+00:07:04,320 --> 00:07:07,040
+okay, you might have to, you know, press tab a few times,
+
+86
+00:07:07,040 --> 00:07:10,320
+but get to the relevant menu without even touching the mouse.
+
+87
+00:07:10,320 --> 00:07:12,160
+Really helps being in that flow state.
+
+88
+00:07:12,720 --> 00:07:13,120
+Definitely.
+
+89
+00:07:13,120 --> 00:07:18,720
+And this is something where I think we haven't spent enough effort in making the ZAP GUI better.
+
+90
+00:07:18,720 --> 00:07:22,640
+So it's something I know we're actually at one of the core team members is very keen on.
+
+91
+00:07:22,640 --> 00:07:22,960
+
+
+92
+00:07:22,960 --> 00:07:23,040
+
+
+93
+00:07:23,040 --> 00:07:23,200
+
+
+94
+00:07:23,200 --> 00:07:23,360
+
+
+95
+00:07:23,360 --> 00:07:23,440
+
+
+96
+00:07:23,440 --> 00:07:25,760
+Looking at the needed, the detached tabs.
+
+97
+00:07:25,760 --> 00:07:29,680
+Um, so, uh, yeah, more, more will be coming, no doubt.
+
+98
+00:07:32,320 --> 00:07:34,960
+So next up is standard policy definitions.
+
+99
+00:07:35,520 --> 00:07:39,600
+So the policy definitions, these are the scan policies
+
+100
+00:07:39,600 --> 00:07:42,640
+that you can select when you're performing an active scan.
+
+101
+00:07:43,280 --> 00:07:45,120
+And we've supported these for many years,
+
+102
+00:07:45,120 --> 00:07:48,880
+but we haven't actually specified any specific definitions.
+
+103
+00:07:48,880 --> 00:07:51,520
+So we've left it up to you to make your own decisions.
+
+104
+00:07:51,520 --> 00:07:52,720
+And you can still do that.
+
+105
+00:07:52,720 --> 00:07:52,960
+
+
+106
+00:07:52,960 --> 00:07:54,560
+So you can still define your own scan policies.
+
+107
+00:07:54,560 --> 00:07:55,600
+We're not taking that...
+
+108
+00:07:55,600 --> 00:07:57,920
+We're definitely not taking that ability away from you,
+
+109
+00:07:57,920 --> 00:08:00,240
+but we've had a lot of cases where people have asked us,
+
+110
+00:08:00,240 --> 00:08:02,400
+what do we think we should be?
+
+111
+00:08:02,400 --> 00:08:03,280
+People should be running.
+
+112
+00:08:03,920 --> 00:08:05,440
+And so we've been thinking about it
+
+113
+00:08:05,440 --> 00:08:07,680
+and we've come up with a set of scan policies
+
+114
+00:08:08,480 --> 00:08:10,240
+and I won't go through all of them now.
+
+115
+00:08:10,240 --> 00:08:12,080
+And we should probably have a separate session on this.
+
+116
+00:08:12,080 --> 00:08:14,720
+So we'll do another video on these in the future.
+
+117
+00:08:14,720 --> 00:08:17,280
+What we've got is a set of policies
+
+118
+00:08:17,280 --> 00:08:20,240
+that we think work well in particular situations.
+
+119
+00:08:20,880 --> 00:08:22,720
+And if you go into any one of them,
+
+120
+00:08:22,720 --> 00:08:25,040
+you'll see details about them
+
+121
+00:08:25,040 --> 00:08:26,000
+and you can actually go in
+
+122
+00:08:26,000 --> 00:08:28,400
+and see the individual rules that are enabled.
+
+123
+00:08:32,160 --> 00:08:32,800
+Yeah, absolutely.
+
+124
+00:08:32,800 --> 00:08:33,600
+Have a play everyone.
+
+125
+00:08:33,600 --> 00:08:35,280
+My favorite is the API policy,
+
+126
+00:08:35,840 --> 00:08:37,600
+because we don't have a lot.
+
+127
+00:08:37,600 --> 00:08:38,560
+I mean, we have the top 10
+
+128
+00:08:38,560 --> 00:08:42,480
+and we have a lot of standards of how to look at APIs,
+
+129
+00:08:42,480 --> 00:08:47,120
+but we've never grouped at a, you know, collection of rules,
+
+130
+00:08:47,120 --> 00:08:48,240
+active rules, right?
+
+131
+00:08:48,880 --> 00:08:51,200
+What an API policy should look like.
+
+132
+00:08:52,720 --> 00:08:54,880
+So answers on a postcard
+
+133
+00:08:54,880 --> 00:08:55,760
+in the next video
+
+134
+00:08:55,760 --> 00:08:57,600
+on more detail in each
+
+135
+00:08:57,600 --> 00:08:58,100
+of those policies.
+
+136
+00:08:58,200 --> 00:08:58,300
+
+
+137
+00:08:58,400 --> 00:08:58,5
+
+
+138
+00:08:58,840 --> 00:08:59,100
+Absolutely.
+
+139
+00:09:00,100 --> 00:09:01,100
+So that was standard policy definitions.
+
+140
+00:09:01,920 --> 00:09:04,140
+And then another one.
+
+141
+00:09:04,240 --> 00:09:07,100
+Now this one sounds a little bit trivial.
+
+142
+00:09:07,200 --> 00:09:11,140
+So we've got the ability to export the site tree.
+
+143
+00:09:11,240 --> 00:09:13,180
+And we actually have a format,
+
+144
+00:09:13,280 --> 00:09:15,140
+a defined format for the sites tree.
+
+145
+00:09:15,240 --> 00:09:16,180
+So it's YAML.
+
+146
+00:09:17,180 --> 00:09:21,600
+And hey, so what? You can export it what's what good is that?
+
+147
+00:09:22,000 --> 00:09:25,280
+That is one where we're going to have to have another video for it,
+
+148
+00:09:25,280 --> 00:09:28,960
+because we've also got the ability to prune the sites tree.
+
+149
+00:09:29,520 --> 00:09:31,520
+And this suddenly gets very interesting,
+
+150
+00:09:31,520 --> 00:09:32,880
+particularly in CICD,
+
+151
+00:09:32,880 --> 00:09:35,840
+because if you want to do a very quick scan
+
+152
+00:09:35,840 --> 00:09:38,240
+of just the things that have changed,
+
+153
+00:09:38,800 --> 00:09:43,920
+then this site tree export and pruning does actually allow it.
+
+154
+00:09:43,920 --> 00:09:45,920
+So it means you can do very fast,
+
+155
+00:09:45,920 --> 00:09:47,360
+very effective scanning,
+
+156
+00:09:47,360 --> 00:09:49,040
+DAS scanning in CICD.
+
+157
+00:09:49,840 --> 00:09:51,520
+So we'll have another video about that
+
+158
+00:09:51,520 --> 00:09:51,920
+but,
+
+159
+00:09:51,920 --> 00:09:53,200
+that is enabled in this release.
+
+160
+00:09:54,400 --> 00:09:56,560
+I think one day soon,
+
+161
+00:09:56,560 --> 00:09:59,280
+there's going to be an RFC with your name.
+
+162
+00:10:00,000 --> 00:10:01,600
+I want my name in another RFC.
+
+163
+00:10:01,600 --> 00:10:02,640
+You could have all the glory
+
+164
+00:10:02,640 --> 00:10:04,000
+and the team can have all the glory
+
+165
+00:10:05,280 --> 00:10:07,040
+involving a common standard
+
+166
+00:10:07,040 --> 00:10:09,600
+of what a site tree format should look like.
+
+167
+00:10:09,600 --> 00:10:12,400
+So this is definitely a step in that direction.
+
+168
+00:10:12,400 --> 00:10:15,440
+And we need more standardization between tools.
+
+169
+00:10:15,440 --> 00:10:19,280
+We'll probably invite some of the other teams as well to contribute.
+
+170
+00:10:19,920 --> 00:10:20,720
+Absolutely.
+
+171
+00:10:20,720 --> 00:10:21,040
+Yeah.
+
+172
+00:10:21,040 --> 00:10:21,280
+No.
+
+173
+00:10:21,280 --> 00:10:22,160
+We definitely want to.
+
+174
+00:10:22,160 --> 00:10:23,840
+There's a lot more standardization
+
+175
+00:10:23,840 --> 00:10:25,600
+that would really help the industry.
+
+176
+00:10:25,600 --> 00:10:27,520
+So there's an open source project.
+
+177
+00:10:27,520 --> 00:10:29,600
+We are always delighted to be involved in those efforts.
+
+178
+00:10:32,240 --> 00:10:37,360
+So what is sequence scanning to somebody who's just used 2.16
+
+179
+00:10:37,360 --> 00:10:39,680
+and that's their first experience of ZAP?
+
+180
+00:10:40,720 --> 00:10:41,120
+Right.
+
+181
+00:10:41,120 --> 00:10:43,760
+Well, we've had a sequence scanner for quite a while.
+
+182
+00:10:44,320 --> 00:10:46,800
+I think it was a Google Summer of Code project.
+
+183
+00:10:47,360 --> 00:10:49,360
+And this is where you have a site where they're,
+
+184
+00:10:49,360 --> 00:10:49,460
+
+
+185
+00:10:49,460 --> 00:10:49,520
+
+
+186
+00:10:49,520 --> 00:10:49,600
+
+
+187
+00:10:49,600 --> 00:10:49,680
+
+
+188
+00:10:49,680 --> 00:10:49,760
+
+
+189
+00:10:49,760 --> 00:10:49,840
+
+
+190
+00:10:49,840 --> 00:10:49,920
+
+
+191
+00:10:49,920 --> 00:10:50,160
+
+
+192
+00:10:50,160 --> 00:10:50,240
+
+
+193
+00:10:50,240 --> 00:10:50,400
+
+
+194
+00:10:50,400 --> 00:10:50,480
+
+
+195
+00:10:50,480 --> 00:10:50,560
+
+
+196
+00:10:50,560 --> 00:10:50,640
+
+
+197
+00:10:50,640 --> 00:10:50,720
+
+
+198
+00:10:50,720 --> 00:10:50,800
+
+
+199
+00:10:50,800 --> 00:10:50,880
+
+
+200
+00:10:50,880 --> 00:10:50,960
+
+
+201
+00:10:50,960 --> 00:10:51,040
+
+
+202
+00:10:51,040 --> 00:10:51,120
+
+
+203
+00:10:51,120 --> 00:10:51,200
+
+
+204
+00:10:51,200 --> 00:10:51,240
+
+
+205
+00:10:51,240 --> 00:10:51,280
+
+
+206
+00:10:51,280 --> 00:10:51,400
+
+
+207
+00:10:51,400 --> 00:10:51,440
+
+
+208
+00:10:51,440 --> 00:10:51,720
+
+
+209
+00:10:51,720 --> 00:10:51,740
+
+
+210
+00:10:51,740 --> 00:10:51,800
+
+
+211
+00:10:51,800 --> 00:10:52,920
+sequences. 
+
+212
+00:10:52,920 --> 00:10:58,840
+So it could be a wizard or it could be a set of steps that you typically go through in order.
+
+213
+00:10:59,320 --> 00:11:01,400
+And if you try and go to the last step,
+
+214
+00:11:02,360 --> 00:11:04,600
+it won't work if you just go straight to it.
+
+215
+00:11:04,600 --> 00:11:06,760
+So you need to go through a certain step, you know,
+
+216
+00:11:06,760 --> 00:11:07,480
+imagine your wizard.
+
+217
+00:11:07,480 --> 00:11:09,080
+You've got step one step two step three,
+
+218
+00:11:09,640 --> 00:11:10,360
+and you can put,
+
+219
+00:11:11,000 --> 00:11:11,240
+you know,
+
+220
+00:11:11,240 --> 00:11:13,960
+there's input on each three of these steps and say there's
+
+221
+00:11:13,960 --> 00:11:15,400
+a vulnerability on the third step,
+
+222
+00:11:16,040 --> 00:11:18,360
+but you can't find it by going straight to step three,
+
+223
+00:11:19,000 --> 00:11:19,400
+because,
+
+224
+00:11:19,400 --> 00:11:19,720
+Yeah.
+
+225
+00:11:19,720 --> 00:11:19,960
+Yeah.
+
+226
+00:11:19,960 --> 00:11:20,820
+The application would be an invalid if that wasn't
+
+227
+00:11:20,820 --> 00:11:21,240
+
+
+228
+00:11:21,240 --> 00:11:27,960
+state and you'll get rejected. Now we've had a sequence scanner before but we had a reason to
+
+229
+00:11:27,960 --> 00:11:32,540
+actually look into it in a bit more detail and we found it wasn't quite as effective as we liked
+
+230
+00:11:32,540 --> 00:11:38,180
+and it was it ran particularly slowly and the cases we didn't handle very well at all
+
+231
+00:11:38,180 --> 00:11:45,840
+so we put quite a bit of work into this so the sequence scanner is now beta status and it is
+
+232
+00:11:45,840 --> 00:11:51,200
+included in ZAP 216 by default and we will definitely have to have another
+
+233
+00:11:51,200 --> 00:11:55,360
+one of these ZAP chats about it because there's a lot more to talk about
+
+234
+00:11:55,360 --> 00:12:02,360
+hold your breath everyone for the more experienced users when it comes to sequence scanning think of
+
+235
+00:12:02,360 --> 00:12:07,920
+selenium right that's where i think the rationale steps from and you know you've got to kind of you
+
+236
+00:12:07,920 --> 00:12:14,800
+know click here go to add something to the cart in a shopping context and then go to checkout and
+
+237
+00:12:14,800 --> 00:12:15,680
+then you know
+
+238
+00:12:15,680 --> 00:12:15,820
+you know
+
+239
+00:12:15,840 --> 00:12:21,180
+cross out script the specific payload of the number of you know items that you've put in the
+
+240
+00:12:21,180 --> 00:12:26,460
+shopping cart right otherwise it doesn't work because it needs an object for the dom xss to
+
+241
+00:12:26,460 --> 00:12:33,040
+to work so that's the kind of rationale behind sequence scanning um why move the passive scanner
+
+242
+00:12:33,040 --> 00:12:39,380
+into an add-on i quite enjoyed the passive scanner just being there doing its thing as i was browsing
+
+243
+00:12:39,380 --> 00:12:45,680
+the internets of the world it will still be there uh this is part of a long-running
+
+244
+00:12:45,680 --> 00:12:53,020
+process we've got we've been trying to get stuff out of the core uh so even though you know
+
+245
+00:12:53,020 --> 00:12:57,840
+passive scanner used to be part of the core the fact that it's not part of the core won't make
+
+246
+00:12:57,840 --> 00:13:04,260
+any difference to you really it'll still be there it includes no releases the traditional spider is
+
+247
+00:13:04,260 --> 00:13:08,640
+used to be part of the core is no longer part of the core um we've been trying to move stuff out
+
+248
+00:13:08,640 --> 00:13:13,480
+of the core and the reason is we can only update things in the core every time we do a full release
+
+249
+00:13:13,480 --> 00:13:15,520
+like 216 and 275
+
+250
+00:13:15,680 --> 00:13:21,620
+but you know we don't expect another release out for at least four months uh and we like to be able
+
+251
+00:13:21,620 --> 00:13:27,040
+to push changes and fixes out very quickly if things are in add-ons we can update them within
+
+252
+00:13:27,040 --> 00:13:32,440
+hours you know we can get a change out we can get it released very very quickly it takes quite a lot
+
+253
+00:13:32,440 --> 00:13:37,860
+a lot of effort to make a core release so we're trying to move all the significant functionality
+
+254
+00:13:37,860 --> 00:13:42,500
+like the passive scanner out of the core and that's one of the ones we did done this release
+
+255
+00:13:42,500 --> 00:13:45,400
+very good so still there still
+
+256
+00:13:45,680 --> 00:13:52,460
+run runs as it should yeah should be no change at all apart from the fact if there's any bugs we
+
+257
+00:13:52,460 --> 00:13:53,380
+should be able to fix them quicker
+
+258
+00:13:53,380 --> 00:14:03,660
+then uh i mean the last major one is last but not least automation framework enhancements and this
+
+259
+00:14:03,660 --> 00:14:09,320
+is like a handful so yeah and i think this is gonna have to be another session uh we've decided
+
+260
+00:14:09,320 --> 00:14:14,620
+we're gonna try and keep these um ZAP chat videos a little bit shorter uh so we'll split this one
+
+261
+00:14:14,620 --> 00:14:15,660
+out again but
+
+262
+00:14:15,680 --> 00:14:22,060
+basically there's a new set of jobs um so with active scanning exporting pruning client spider
+
+263
+00:14:22,060 --> 00:14:27,700
+so a lot of these jobs are really related to the other um changes that i mentioned earlier
+
+264
+00:14:27,700 --> 00:14:34,060
+uh there's an exit status one uh but we'll explain all of that uh in a another session
+
+265
+00:14:34,060 --> 00:14:39,700
+but if you use the automation framework then do have a look at these enhancements because
+
+266
+00:14:39,700 --> 00:14:43,460
+there could be something which will be exactly what you're looking for
+
+267
+00:14:45,680 --> 00:14:51,860
+what i like about the 216 release is that it shows the maturity now of that attack proxy if you think
+
+268
+00:14:51,860 --> 00:14:58,620
+about grouping items together be it policy rules that come together jobs when it comes to automation
+
+269
+00:14:58,620 --> 00:15:04,060
+or moving things out of the core that shows that we're trying to you know move forward strategically
+
+270
+00:15:04,060 --> 00:15:10,180
+as we said before in a agile manner whereby you've got components that can have different levels of
+
+271
+00:15:10,180 --> 00:15:14,000
+maturity different versioning when it comes to add-ons and at the same time we're offering
+
+272
+00:15:15,680 --> 00:15:20,400
+uh a framework with the reliability of the card consciousness and i like that very much
+
+273
+00:15:20,400 --> 00:15:25,420
+for the development of the expo companies because it's basic science we're going to
+
+274
+00:15:25,420 --> 00:15:30,620
+deal particularly with well-structured homepage people who want to go in an openenned Tolladeren
+
+275
+00:15:30,620 --> 00:15:34,620
+but they really want to make sure that it comes with basic features and maybe the old
+
+276
+00:15:34,620 --> 00:15:39,640
+constructs so things like that um and and opening up that uh the platform
+
+277
+00:15:39,640 --> 00:15:44,580
+and the mentioning of virtual privacy is obviously very important all of as well as creating a
+
+278
+00:15:44,580 --> 00:15:45,520
+slutty
+
+279
+00:15:45,520 --> 00:15:51,200
+uh because we're moving some more stuff into add-ons in fact we've got more now and there's a
+
+280
+00:15:51,200 --> 00:15:55,040
+various reasons for that i mean we have been holding a few things back because we wanted to
+
+281
+00:15:55,040 --> 00:16:00,640
+be part of the new release uh but one of the main reasons is um is thanks to check marks employing
+
+282
+00:16:00,640 --> 00:16:05,360
+three of the core team we're doing a lot more work now and so we've got three people working
+
+283
+00:16:05,360 --> 00:16:10,080
+full-time on ZAP uh we've been able to do a lot more and there's a lot more coming we've got a
+
+284
+00:16:10,080 --> 00:16:14,400
+load of fun things coming along and we're going to be very busy recording these videos because
+
+285
+00:16:14,400 --> 00:16:20,720
+there's a lot to talk about all right off we go to the next video that's 216 everyone
+
+286
+00:16:22,960 --> 00:16:26,720
+and uh yeah see you next time
+
