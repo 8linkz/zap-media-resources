@@ -900,7 +900,7 @@ Yeah.
 
 226
 00:11:19,960 --> 00:11:20,820
-The application would be an invalid if that wasn't
+The application will be invalid
 
 227
 00:11:20,820 --> 00:11:21,240
@@ -908,31 +908,31 @@ The application would be an invalid if that wasn't
 
 228
 00:11:21,240 --> 00:11:27,960
-state and you'll get rejected. Now we've had a sequence scanner before but we had a reason to
+state, and you'll get rejected. Now, we've had a sequence scanner before, but we had a reason to
 
 229
 00:11:27,960 --> 00:11:32,540
-actually look into it in a bit more detail and we found it wasn't quite as effective as we liked
+actually look into it in a bit more detail, and we found it wasn't quite as effective as we liked
 
 230
 00:11:32,540 --> 00:11:38,180
-and it was it ran particularly slowly and the cases we didn't handle very well at all
+and it was it ran particularly slowly and the cases we didn't handle very well at all.
 
 231
 00:11:38,180 --> 00:11:45,840
-so we put quite a bit of work into this so the sequence scanner is now beta status and it is
+So we put quite a bit of work into this so the sequence scanner is now beta status and it is
 
 232
 00:11:45,840 --> 00:11:51,200
-included in ZAP 216 by default and we will definitely have to have another
+included in ZAP 2.16 by default and we will definitely have to have another
 
 233
 00:11:51,200 --> 00:11:55,360
-one of these ZAP chats about it because there's a lot more to talk about
+one of these ZAP Chats about it because there's a lot more to talk about.
 
 234
-00:11:55,360 --> 00:12:02,360
-hold your breath everyone for the more experienced users when it comes to sequence scanning think of
+00:11:56,960 --> 00:12:02,360
+Hold your breath everyone. For the more experienced users when it comes to sequence scanning think of
 
 235
 00:12:02,360 --> 00:12:07,920
@@ -948,43 +948,43 @@ then you know
 
 238
 00:12:15,680 --> 00:12:15,820
-you know
+
 
 239
 00:12:15,840 --> 00:12:21,180
-cross out script the specific payload of the number of you know items that you've put in the
+cross site script the specific payload of the number of you know items that you've put in the
 
 240
 00:12:21,180 --> 00:12:26,460
-shopping cart right otherwise it doesn't work because it needs an object for the dom xss to
+shopping cart right otherwise it doesn't work, because it needs an object for the DOM XSS to
 
 241
 00:12:26,460 --> 00:12:33,040
-to work so that's the kind of rationale behind sequence scanning um why move the passive scanner
+to work. So that's the kind of rationale behind sequence scanning. Why move the passive scanner
 
 242
 00:12:33,040 --> 00:12:39,380
-into an add-on i quite enjoyed the passive scanner just being there doing its thing as i was browsing
+into an add-on? I quite enjoyed the passive scanner just being there doing its thing as i was browsing
 
 243
 00:12:39,380 --> 00:12:45,680
-the internets of the world it will still be there uh this is part of a long-running
+the internets of the world. It will still be there. This is part of a long-running
 
 244
 00:12:45,680 --> 00:12:53,020
-process we've got we've been trying to get stuff out of the core uh so even though you know
+process we've got we've been trying to get stuff out of the core. So even though you know
 
 245
 00:12:53,020 --> 00:12:57,840
-passive scanner used to be part of the core the fact that it's not part of the core won't make
+passive scanner used to be part of the core. The fact that it's not part of the core won't make
 
 246
 00:12:57,840 --> 00:13:04,260
-any difference to you really it'll still be there it includes no releases the traditional spider is
+any difference to you really it'll still be there it includes all releases. The traditional spider is
 
 247
 00:13:04,260 --> 00:13:08,640
-used to be part of the core is no longer part of the core um we've been trying to move stuff out
+used to be part of the core is no longer part of the core. We've been trying to move stuff out
 
 248
 00:13:08,640 --> 00:13:13,480
@@ -992,87 +992,87 @@ of the core and the reason is we can only update things in the core every time w
 
 249
 00:13:13,480 --> 00:13:15,520
-like 216 and 275
+like 2.16 and 2.17,
 
 250
 00:13:15,680 --> 00:13:21,620
-but you know we don't expect another release out for at least four months uh and we like to be able
+but you know we don't expect another release out for at least four months and we like to be able
 
 251
 00:13:21,620 --> 00:13:27,040
-to push changes and fixes out very quickly if things are in add-ons we can update them within
+to push changes and fixes out very quickly. If things are in add-ons we can update them within
 
 252
 00:13:27,040 --> 00:13:32,440
-hours you know we can get a change out we can get it released very very quickly it takes quite a lot
+hours. You know, we can get a change out. We can get it released very very quickly. It takes quite a lot
 
 253
 00:13:32,440 --> 00:13:37,860
-a lot of effort to make a core release so we're trying to move all the significant functionality
+a lot of effort to make a core release. So we're trying to move all the significant functionality
 
 254
 00:13:37,860 --> 00:13:42,500
-like the passive scanner out of the core and that's one of the ones we did done this release
+like the passive scanner out of the core and that's one of the ones we did done this release.
 
 255
 00:13:42,500 --> 00:13:45,400
-very good so still there still
+Very good! So still there still
 
 256
 00:13:45,680 --> 00:13:52,460
-run runs as it should yeah should be no change at all apart from the fact if there's any bugs we
+run runs as it should? Yeah! Should be no change at all, apart from the fact if there's any bugs we
 
 257
 00:13:52,460 --> 00:13:53,380
-should be able to fix them quicker
+should be able to fix them quicker.
 
 258
-00:13:53,380 --> 00:14:03,660
-then uh i mean the last major one is last but not least automation framework enhancements and this
+00:13:57,380 --> 00:14:03,660
+Then uh i mean the last major one is.. Last but not least... automation framework enhancements and this
 
 259
 00:14:03,660 --> 00:14:09,320
-is like a handful so yeah and i think this is gonna have to be another session uh we've decided
+is like a handful.. so.. Yeah and i think this is gonna have to be another session. We've decided
 
 260
 00:14:09,320 --> 00:14:14,620
-we're gonna try and keep these um ZAP chat videos a little bit shorter uh so we'll split this one
+we're gonna try and keep these um ZAP Chat videos a little bit shorter. So we'll split this one
 
 261
 00:14:14,620 --> 00:14:15,660
-out again but
+out again, but
 
 262
 00:14:15,680 --> 00:14:22,060
-basically there's a new set of jobs um so with active scanning exporting pruning client spider
+basically there's a new set of jobs. So with active scanning, exporting, pruning, client spider
 
 263
 00:14:22,060 --> 00:14:27,700
-so a lot of these jobs are really related to the other um changes that i mentioned earlier
+so a lot of these jobs are really related to the other changes that i mentioned earlier
 
 264
 00:14:27,700 --> 00:14:34,060
-uh there's an exit status one uh but we'll explain all of that uh in a another session
+there's an exit status one, but we'll explain all of that in a another session,
 
 265
 00:14:34,060 --> 00:14:39,700
-but if you use the automation framework then do have a look at these enhancements because
+but if you use the automation framework then do have a look at these enhancements, because
 
 266
 00:14:39,700 --> 00:14:43,460
-there could be something which will be exactly what you're looking for
+there could be something which will be exactly what you're looking for.
 
 267
 00:14:45,680 --> 00:14:51,860
-what i like about the 216 release is that it shows the maturity now of that attack proxy if you think
+What i like about the 2.16 release is that it shows the maturity now of Zed Attack Proxy. If you think
 
 268
 00:14:51,860 --> 00:14:58,620
-about grouping items together be it policy rules that come together jobs when it comes to automation
+about grouping items together be it policy rules that come together, jobs when it comes to automation
 
 269
 00:14:58,620 --> 00:15:04,060
-or moving things out of the core that shows that we're trying to you know move forward strategically
+or moving things out of the core, that shows that we're trying to you know move forward strategically
 
 270
 00:15:04,060 --> 00:15:10,180
@@ -1080,65 +1080,65 @@ as we said before in a agile manner whereby you've got components that can have 
 
 271
 00:15:10,180 --> 00:15:14,000
-maturity different versioning when it comes to add-ons and at the same time we're offering
+maturity different versioning when it comes to add-ons and at the same time we're offering standardizations,  
 
 272
 00:15:15,680 --> 00:15:20,400
-uh a framework with the reliability of the card consciousness and i like that very much
+sites tree, grouping of of policies, automation framework, specific jobs...
 
 273
 00:15:20,400 --> 00:15:25,420
-for the development of the expo companies because it's basic science we're going to
+...This shows that, you know, there is an active commitment now
 
 274
 00:15:25,420 --> 00:15:30,620
-deal particularly with well-structured homepage people who want to go in an openenned Tolladeren
+and there's always been an active commitment towards standardizing 
 
 275
 00:15:30,620 --> 00:15:34,620
-but they really want to make sure that it comes with basic features and maybe the old
+web application security and the bar increasing 
 
 276
 00:15:34,620 --> 00:15:39,640
-constructs so things like that um and and opening up that uh the platform
+in 2025 - great news Simon, great work from the team. Absoloutly and you know
 
 277
 00:15:39,640 --> 00:15:44,580
-and the mentioning of virtual privacy is obviously very important all of as well as creating a
+at one stage i thought when we had major releases like 2.16, we'd have less and
 
 278
 00:15:44,580 --> 00:15:45,520
-slutty
+less in them
 
 279
 00:15:45,520 --> 00:15:51,200
-uh because we're moving some more stuff into add-ons in fact we've got more now and there's a
+because we're moving some more stuff into add-ons. In fact we've got more now and there's a
 
 280
 00:15:51,200 --> 00:15:55,040
-various reasons for that i mean we have been holding a few things back because we wanted to
+various reasons for that i mean we have been holding a few things back, because we wanted to
 
 281
 00:15:55,040 --> 00:16:00,640
-be part of the new release uh but one of the main reasons is um is thanks to check marks employing
+be part of the new release, but one of the main reasons is thanks to checkmarkx employing
 
 282
 00:16:00,640 --> 00:16:05,360
-three of the core team we're doing a lot more work now and so we've got three people working
+three of the core team, we're doing a lot more work now. So we've got three people working
 
 283
 00:16:05,360 --> 00:16:10,080
-full-time on ZAP uh we've been able to do a lot more and there's a lot more coming we've got a
+full-time on ZAP. We've been able to do a lot more and there's a lot more coming. We've got a
 
 284
 00:16:10,080 --> 00:16:14,400
-load of fun things coming along and we're going to be very busy recording these videos because
+load of fun things coming along and we're going to be very busy recording these videos, because
 
 285
 00:16:14,400 --> 00:16:20,720
-there's a lot to talk about all right off we go to the next video that's 216 everyone
+there's a lot to talk about. All right off we go to the next video. That's 2.16 everyone
 
 286
 00:16:22,960 --> 00:16:26,720
-and uh yeah see you next time
+Yeah thanks for listening and yeah see you next time.
 
